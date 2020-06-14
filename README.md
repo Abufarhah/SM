@@ -9,9 +9,12 @@ on the records saved in the set in an Aerospike namespace.
 The first project was a simulation to the service manager operations such as the crud operations of the bundles using a REST API 
 to create/ read/ update/ delete bundles from the aerospike Database. also, to simulate the provision operation to provide an existing 
 bundle in the SM Database to the ME Database using REST API that called to send a SOAP request to add the bundle to the ME database.
+crud operationts can called using localhost:8080/bundles/ - GET,POST,PUT and DELETE was implemented.
+provision operation can called using POST method with localhost:8080/bundles/{id}
 
 The second project was a simulation of the managed element operations in which a SOAP web service was built to add and get bundles 
 from the aerospike database. The SOAP web service was used by the SM to provide a bundle from its database to the ME database.
+SOAP services can be testing with SoapUI using the url of the wsdl http://localhost:8083/SoapWS/bundles.wsdl
 
 The projects can be run using the jar file which was built using the command "java -jar" or "./gradlew bootRun"
 
