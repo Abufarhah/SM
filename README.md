@@ -1,5 +1,6 @@
 # SM
 SM Simultion
+
 Two simple projects were built as an attempt to simulate what we learned in the sessions presented to us by Rajaie and Ahmad 
 like the provision between the SM and the ME. also to present some of the new technologies we learned such as spring boot 
 using Gradle to build the REST/SOAP web services that connected with the Aerospike NoSQL Database to perform the crud operations
