@@ -84,7 +84,7 @@ public class BundleController {
             return new ResponseEntity<String>("Bundle with id: " + id + " is already provided",
                     HttpStatus.NOT_FOUND);
         } else {
-            return new ResponseEntity<String>("Employee with id: " + id + " error in provision",
+            return new ResponseEntity<String>("Bundle with id: " + id + " error in provision",
                     HttpStatus.NOT_FOUND);
         }
     }

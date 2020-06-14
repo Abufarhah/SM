@@ -41,7 +41,6 @@ public class SoapClient {
             while ((output = br.readLine()) != null) {
                 result += output;
             }
-            //System.out.println(result);
             if(result.contains("exist")) {
                 return 0;
             }
@@ -49,7 +48,6 @@ public class SoapClient {
 
         } catch (Exception e) {
             return -1;
-            //System.out.println("***provision-errer");
         }
 
     }

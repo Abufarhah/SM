@@ -85,11 +85,6 @@ public class BundleService {
         } catch (AerospikeException e) {
             return false;
         }
-
-        /*
-         * for (int i = 0; i < empList.size(); i++) { if (empList.get(i).getId() == id)
-         * { empList.set(i, employee); return true; } } return false;
-         */
     }
 
     public boolean deleteBundle(int id) {
@@ -101,10 +96,6 @@ public class BundleService {
         } catch (AerospikeException e) {
             return false;
         }
-
-        /*
-         * if (empList.removeIf(e -> e.getId() == id)) { return true; } return false;
-         */
     }
 
     public int provideBundle(int id) {
