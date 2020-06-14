@@ -28,11 +28,11 @@ public class BundleService {
 
             @Override
             public void scanCallback(Key key, Record record) throws AerospikeException {
-                Bundle temp = new Bundle();
-                temp.setId(record.getInt("id"));
-                temp.setName(record.getString("name"));
-                temp.setPrice(record.getDouble("price"));
-                bundleList.add(temp);
+                Bundle bundle = new Bundle();
+                bundle.setId(record.getInt("id"));
+                bundle.setName(record.getString("name"));
+                bundle.setPrice(record.getDouble("price"));
+                bundleList.add(bundle);
             }
         });
         Collections.sort(bundleList);

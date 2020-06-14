@@ -18,10 +18,9 @@ public class BundleController {
     BundleService bundleService;
 
     @RequestMapping(method = RequestMethod.GET, path = "/bundles")
-    public ResponseEntity<List<Bundle>> getEmployees() {
+    public ResponseEntity<List<Bundle>> getBundles() {
         try {
-            List<Bundle> list = new ArrayList<Bundle>();
-            list = bundleService.getBundles();
+            List<Bundle> list=bundleService.getBundles();
             if (list.size() == 0) {
                 return new ResponseEntity<List<Bundle>>(new ArrayList<Bundle>(), HttpStatus.NOT_FOUND);
             } else {
@@ -34,7 +33,7 @@ public class BundleController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/bundles/{id}")
-    public ResponseEntity<Bundle> getEmployee(@PathVariable int id) {
+    public ResponseEntity<Bundle> getBundle(@PathVariable int id) {
         if (bundleService.getBundle(id) != null) {
             return new ResponseEntity<Bundle>(bundleService.getBundle(id), HttpStatus.OK);
         } else {
@@ -43,7 +42,7 @@ public class BundleController {
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/bundles")
-    public ResponseEntity<String> addEmployee(@RequestBody Bundle bundle) {
+    public ResponseEntity<String> addBundle(@RequestBody Bundle bundle) {
         int flag= bundleService.addBundle(bundle);
         if (flag==1) {
             return new ResponseEntity<String>("Bundle with id: " + bundle.getId() + " added successfully",
@@ -58,7 +57,7 @@ public class BundleController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, path = "/bundles/{id}")
-    public ResponseEntity<String> updateEmployee(@RequestBody Bundle bundle, @PathVariable int id) {
+    public ResponseEntity<String> updateBundle(@RequestBody Bundle bundle, @PathVariable int id) {
         if (bundleService.updateBundle(id, bundle)) {
             return new ResponseEntity<String>("updated successfully", HttpStatus.OK);
         } else {
@@ -67,7 +66,7 @@ public class BundleController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, path = "/bundles/{id}")
-    public ResponseEntity<String> deleteEmployee(@PathVariable int id) {
+    public ResponseEntity<String> deleteBundle(@PathVariable int id) {
         if (bundleService.deleteBundle(id)) {
             return new ResponseEntity<String>("deleted successfully", HttpStatus.OK);
         } else {
@@ -76,7 +75,7 @@ public class BundleController {
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/bundles/{id}")
-    public ResponseEntity<String> provideEmployee(@PathVariable int id) {
+    public ResponseEntity<String> provideBundle(@PathVariable int id) {
         int flag = bundleService.provideBundle(id);
         if (flag == 1) {
             return new ResponseEntity<String>("Bundle with id: " + id + " provided successfully", HttpStatus.OK);

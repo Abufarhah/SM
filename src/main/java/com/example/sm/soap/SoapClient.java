@@ -16,14 +16,16 @@ public class SoapClient {
             conn.setRequestProperty("Content-Type", "text/xml");
             conn.setDoOutput(true);
             OutputStream os = conn.getOutputStream();
-            String POST_PARAMS = "";
-            POST_PARAMS += "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:me=\"http://example.com/me\">\n" +
+            String POST_PARAMS =
+                    "<soapenv:Envelope" +
+                    " xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" " +
+                    "xmlns:me=\"http://example.com/me\">\n" +
                     "   <soapenv:Header/>\n" +
                     "   <soapenv:Body>\n" +
                     "      <me:addBundleRequest>\n" +
-                    "         <me:id>"+id+"</me:id>\n" +
-                    "         <me:name>"+name+"</me:name>\n" +
-                    "         <me:price>"+price+"</me:price>\n" +
+                    "         <me:id>" + id + "</me:id>\n" +
+                    "         <me:name>" + name + "</me:name>\n" +
+                    "         <me:price>" + price + "</me:price>\n" +
                     "      </me:addBundleRequest>\n" +
                     "   </soapenv:Body>\n" +
                     "</soapenv:Envelope>";
@@ -41,7 +43,7 @@ public class SoapClient {
             while ((output = br.readLine()) != null) {
                 result += output;
             }
-            if(result.contains("exist")) {
+            if (result.contains("exist")) {
                 return 0;
             }
             return 1;
