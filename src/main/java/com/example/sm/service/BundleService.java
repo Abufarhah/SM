@@ -23,7 +23,7 @@ public class BundleService {
     }
 
     public Bundle getBundle(int id) {
-       return bundleDto.getBundleById(id);
+       return bundleDto.getBundle(id);
     }
 
     public int addBundle(Bundle bundle) {
@@ -40,7 +40,7 @@ public class BundleService {
 
     public int provisionBundle(int id) {
         try{
-            Bundle bundle= bundleDto.getBundleById(id);
+            Bundle bundle= bundleDto.getBundle(id);
             AddBundleResponse addBundleResponse=bundleClient.addBundle(bundle.getId(), bundle.getName(),bundle.getPrice());
             if(addBundleResponse.getMessage().contains("exists"))return 0;
             return 1;

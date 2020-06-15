@@ -5,9 +5,9 @@ public class Constants {
     public static final int AEROSPIKE_SERVER_PORT=3000;
     public static final String AEROSPIKE_SERVER_NAMESPACE="test";
     public static final String AEROSPIKE_SERVER_SM_SETNAME="smbundles";
-    public static final String AEROSPIKE_SERVER_BIN1NAME="id";
-    public static final String AEROSPIKE_SERVER_BIN2NAME="name";
-    public static final String AEROSPIKE_SERVER_BIN3NAME="price";
+    public static final String AEROSPIKE_SERVER_BIN_ID ="id";
+    public static final String AEROSPIKE_SERVER_BIN_NAME ="name";
+    public static final String AEROSPIKE_SERVER_BIN_PRICE ="price";
     public static final String BUNDLES_SOAP_URI="http://localhost:8083/SoapWS/bundles";
     public static final String SOAP_URI="http://localhost:8083/SoapWS";
     public static final String GET_BUNDLE_REQUEST_SOPA_ACTION="http://example.com/me/GetBundleRequest";
