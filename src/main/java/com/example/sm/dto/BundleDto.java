@@ -13,22 +13,24 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static com.example.sm.constants.Constants.*;
+
 @Component
 public class BundleDto {
-    private static AerospikeClient aerospikeClient=new AerospikeClient(new ClientPolicy(), "172.28.128.3", 3000);
+    private static AerospikeClient aerospikeClient=new AerospikeClient(new ClientPolicy(), AEROSPIKE_SERVER_HOST_NAME, AEROSPIKE_SERVER_PORT);
     private Policy  policy=new Policy();
     private WritePolicy writePolicy=new WritePolicy();
     private ScanPolicy scanPolicy=new ScanPolicy();
 
     public List<Bundle> getBundleList(){
         List<Bundle> bundleList = new ArrayList<Bundle>();
-        aerospikeClient.scanAll(scanPolicy, "test", "smbundles", new ScanCallback() {
+        aerospikeClient.scanAll(scanPolicy, AEROSPIKE_SERVER_NAMESPACE, AEROSPIKE_SERVER_SM_SETNAME, new ScanCallback() {
             @Override
             public void scanCallback(Key key, Record record) throws AerospikeException {
                 Bundle bundle = new Bundle();
-                bundle.setId(record.getInt("id"));
-                bundle.setName(record.getString("name"));
-                bundle.setPrice(record.getDouble("price"));
+                bundle.setId(record.getInt(AEROSPIKE_SERVER_BIN1NAME));
+                bundle.setName(record.getString(AEROSPIKE_SERVER_BIN2NAME));
+                bundle.setPrice(record.getDouble(AEROSPIKE_SERVER_BIN3NAME));
                 bundleList.add(bundle);
             }
         });
@@ -38,23 +40,23 @@ public class BundleDto {
 
     public Bundle getBundleById(int id){
         Bundle bundle=new Bundle();
-        Key key = new Key("test", "smbundles", "k" + id);
+        Key key = new Key(AEROSPIKE_SERVER_NAMESPACE, AEROSPIKE_SERVER_SM_SETNAME, "k" + id);
         Record record=aerospikeClient.get(scanPolicy,key);
-        bundle.setId(record.getInt("id"));
-        bundle.setName(record.getString("name"));
-        bundle.setPrice(record.getDouble("price"));
+        bundle.setId(record.getInt(AEROSPIKE_SERVER_BIN1NAME));
+        bundle.setName(record.getString(AEROSPIKE_SERVER_BIN2NAME));
+        bundle.setPrice(record.getDouble(AEROSPIKE_SERVER_BIN3NAME));
         return bundle;
     }
 
     public int addBundle(Bundle bundle){
         try {
-            Key key = new Key("test", "smbundles", "k" + bundle.getId());
+            Key key = new Key(AEROSPIKE_SERVER_NAMESPACE, AEROSPIKE_SERVER_SM_SETNAME, "k" + bundle.getId());
             if (aerospikeClient.exists(policy,key)) {
                 return 0;
             }
-            Bin idBin = new Bin("id", bundle.getId());
-            Bin nameBin = new Bin("name", bundle.getName());
-            Bin priceBin = new Bin("price", bundle.getPrice());
+            Bin idBin = new Bin(AEROSPIKE_SERVER_BIN1NAME, bundle.getId());
+            Bin nameBin = new Bin(AEROSPIKE_SERVER_BIN2NAME, bundle.getName());
+            Bin priceBin = new Bin(AEROSPIKE_SERVER_BIN3NAME, bundle.getPrice());
             aerospikeClient.add(writePolicy, key, idBin, nameBin, priceBin);
             return 1;
         }catch (Exception e){
@@ -64,13 +66,13 @@ public class BundleDto {
 
     public int updateBundle(int id,Bundle bundle){
         try {
-            Key key = new Key("test", "smbundles", "k" + bundle.getId());
+            Key key = new Key(AEROSPIKE_SERVER_NAMESPACE, AEROSPIKE_SERVER_SM_SETNAME, "k" + bundle.getId());
             if (!aerospikeClient.exists(policy,key)) {
                 return 0;
             }
-            Bin idBin = new Bin("id", bundle.getId());
-            Bin nameBin = new Bin("name", bundle.getName());
-            Bin priceBin = new Bin("price", bundle.getPrice());
+            Bin idBin = new Bin(AEROSPIKE_SERVER_BIN1NAME, bundle.getId());
+            Bin nameBin = new Bin(AEROSPIKE_SERVER_BIN2NAME, bundle.getName());
+            Bin priceBin = new Bin(AEROSPIKE_SERVER_BIN3NAME, bundle.getPrice());
             aerospikeClient.put(writePolicy, key, idBin, nameBin, priceBin);
             return 1;
         }catch (Exception e){
@@ -80,7 +82,7 @@ public class BundleDto {
 
     public int deleteBundle(int id){
         try {
-            Key key = new Key("test", "smbundles", "k" + id);
+            Key key = new Key(AEROSPIKE_SERVER_NAMESPACE, AEROSPIKE_SERVER_SM_SETNAME, "k" + id);
             if (!aerospikeClient.exists(policy,key)) {
                 return 0;
             }
