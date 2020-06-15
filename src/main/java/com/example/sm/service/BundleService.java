@@ -5,8 +5,10 @@ import com.aerospike.client.policy.ClientPolicy;
 import com.aerospike.client.policy.Policy;
 import com.aerospike.client.policy.ScanPolicy;
 import com.aerospike.client.policy.WritePolicy;
+import com.example.sm.SoapCilent.BundleClient;
 import com.example.sm.model.Bundle;
-import com.example.sm.soap.SoapClient;
+import com.example.sm.wsdl.AddBundleResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,6 +17,10 @@ import java.util.List;
 
 @Service
 public class BundleService {
+
+    @Autowired
+    BundleClient bundleClient;
+
     ClientPolicy cpolicy = new ClientPolicy();
     WritePolicy wpolicy = new WritePolicy();
     Policy policy=new Policy();
@@ -98,13 +104,16 @@ public class BundleService {
         }
     }
 
-    public int provideBundle(int id) {
+    public int provisionBundle(int id) {
         try {
             Key key = new Key("test", "smbundles", "k" + id);
             ScanPolicy policy = new ScanPolicy();
             Record record = client.get(policy, key);
-            return (SoapClient.provision(record.getInt("id"), record.getString("name"), record.getDouble("price")));
+            AddBundleResponse addBundleResponse=bundleClient.addBundle(record.getInt("id"), record.getString("name"), record.getDouble("price"));
+            if(addBundleResponse.getMessage().contains("exists"))return 0;
+            return 1;
         } catch (Exception e) {
+            e.printStackTrace();
             return -1;
         }
     }

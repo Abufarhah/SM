@@ -1,7 +1,9 @@
 package com.example.sm.controller;
 
+import com.example.sm.SoapCilent.BundleClient;
 import com.example.sm.model.Bundle;
 import com.example.sm.service.BundleService;
+import com.example.sm.wsdl.GetBundleResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,10 @@ public class BundleController {
 
     @Autowired
     BundleService bundleService;
+
+    @Autowired
+    BundleClient bundleClient;
+
 
     @RequestMapping(method = RequestMethod.GET, path = "/bundles")
     public ResponseEntity<List<Bundle>> getBundles() {
@@ -76,11 +82,11 @@ public class BundleController {
 
     @RequestMapping(method = RequestMethod.POST, path = "/bundles/{id}")
     public ResponseEntity<String> provideBundle(@PathVariable int id) {
-        int flag = bundleService.provideBundle(id);
+        int flag = bundleService.provisionBundle(id);
         if (flag == 1) {
-            return new ResponseEntity<String>("Bundle with id: " + id + " provided successfully", HttpStatus.OK);
+            return new ResponseEntity<String>("Bundle with id: " + id + " provisioned successfully", HttpStatus.OK);
         } else if (flag == 0) {
-            return new ResponseEntity<String>("Bundle with id: " + id + " is already provided",
+            return new ResponseEntity<String>("Bundle with id: " + id + " is already provisioned",
                     HttpStatus.NOT_FOUND);
         } else {
             return new ResponseEntity<String>("Bundle with id: " + id + " error in provision",
