@@ -64,19 +64,25 @@ public class BundleController {
 
     @RequestMapping(method = RequestMethod.PUT, path = "/bundles/{id}")
     public ResponseEntity<String> updateBundle(@RequestBody Bundle bundle, @PathVariable int id) {
-        if (bundleService.updateBundle(id, bundle)) {
-            return new ResponseEntity<String>("updated successfully", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<String>("Bundle not found!", HttpStatus.NOT_FOUND);
+        int flag=bundleService.updateBundle(id,bundle);
+        if (flag==1) {
+            return new ResponseEntity<String>("Bundle with id: " + id + " updated successfully", HttpStatus.OK);
+        } else if(flag==0){
+            return new ResponseEntity<String>("Bundle with id: " + id +" bundle not found!", HttpStatus.NOT_FOUND);
+        }else{
+            return new ResponseEntity<String>("Bundle with id: " + id +" error in updating!", HttpStatus.NOT_FOUND);
         }
     }
 
     @RequestMapping(method = RequestMethod.DELETE, path = "/bundles/{id}")
     public ResponseEntity<String> deleteBundle(@PathVariable int id) {
-        if (bundleService.deleteBundle(id)) {
-            return new ResponseEntity<String>("deleted successfully", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<String>("Bundle not found!", HttpStatus.NOT_FOUND);
+        int flag = bundleService.deleteBundle(id);
+        if (flag==1) {
+            return new ResponseEntity<String>("Bundle with id: " + id + " deleted successfully", HttpStatus.OK);
+        } else if(flag==0){
+            return new ResponseEntity<String>("Bundle with id: " + id +" bundle not found!", HttpStatus.NOT_FOUND);
+        }else {
+            return new ResponseEntity<String>("Bundle with id: " + id +" error in deleting!", HttpStatus.NOT_FOUND);
         }
     }
 
