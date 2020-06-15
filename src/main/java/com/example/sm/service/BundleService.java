@@ -15,8 +15,8 @@ public class BundleService {
     @Autowired
     BundleClient bundleClient;
 
-
-    private BundleDto bundleDto = new BundleDto();
+    @Autowired
+    private BundleDto bundleDto;
 
     public List<Bundle> getBundles() {
         return bundleDto.getBundleList();

@@ -6,11 +6,14 @@ import com.aerospike.client.policy.Policy;
 import com.aerospike.client.policy.ScanPolicy;
 import com.aerospike.client.policy.WritePolicy;
 import com.example.sm.model.Bundle;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+@Component
 public class BundleDto {
     private static AerospikeClient aerospikeClient=new AerospikeClient(new ClientPolicy(), "172.28.128.3", 3000);
     private Policy  policy=new Policy();
