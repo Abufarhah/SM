@@ -1,7 +1,7 @@
 package com.example.sm.controller;
 
 import com.example.sm.SoapCilent.BundleClient;
-import com.example.sm.model.Bundle;
+import com.example.sm.model.DtoBundle;
 import com.example.sm.service.BundleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,47 +23,47 @@ public class BundleController {
 
 
     @RequestMapping(method = RequestMethod.GET, path = "/bundles")
-    public ResponseEntity<List<Bundle>> getBundles() {
+    public ResponseEntity<List<DtoBundle>> getBundles() {
         try {
-            List<Bundle> list=bundleService.getBundles();
+            List<DtoBundle> list=bundleService.getBundles();
             if (list.size() == 0) {
-                return new ResponseEntity<List<Bundle>>(new ArrayList<Bundle>(), HttpStatus.NOT_FOUND);
+                return new ResponseEntity<List<DtoBundle>>(new ArrayList<DtoBundle>(), HttpStatus.NOT_FOUND);
             } else {
-                return new ResponseEntity<List<Bundle>>(list, HttpStatus.OK);
+                return new ResponseEntity<List<DtoBundle>>(list, HttpStatus.OK);
 
             }
         } catch (Exception e) {
-            return new ResponseEntity<List<Bundle>>(new ArrayList<Bundle>(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<List<DtoBundle>>(new ArrayList<DtoBundle>(), HttpStatus.NOT_FOUND);
         }
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/bundles/{id}")
-    public ResponseEntity<Bundle> getBundle(@PathVariable int id) {
+    public ResponseEntity<DtoBundle> getBundle(@PathVariable int id) {
         if (bundleService.getBundle(id) != null) {
-            return new ResponseEntity<Bundle>(bundleService.getBundle(id), HttpStatus.OK);
+            return new ResponseEntity<DtoBundle>(bundleService.getBundle(id), HttpStatus.OK);
         } else {
-            return new ResponseEntity<Bundle>(bundleService.getBundle(id), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<DtoBundle>(bundleService.getBundle(id), HttpStatus.NOT_FOUND);
         }
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/bundles")
-    public ResponseEntity<String> addBundle(@RequestBody Bundle bundle) {
-        int flag= bundleService.addBundle(bundle);
+    public ResponseEntity<String> addBundle(@RequestBody DtoBundle dtoBundle) {
+        int flag= bundleService.addBundle(dtoBundle);
         if (flag==1) {
-            return new ResponseEntity<String>("Bundle with id: " + bundle.getId() + " added successfully",
+            return new ResponseEntity<String>("Bundle with id: " + dtoBundle.getId() + " added successfully",
                     HttpStatus.OK);
         } else if(flag==-1) {
-            return new ResponseEntity<String>("Bundle with id: " + bundle.getId() + " error in adding",
+            return new ResponseEntity<String>("Bundle with id: " + dtoBundle.getId() + " error in adding",
                     HttpStatus.BAD_REQUEST);
         }else {
-            return new ResponseEntity<String>("Bundle with id: " + bundle.getId() + " is already exist",
+            return new ResponseEntity<String>("Bundle with id: " + dtoBundle.getId() + " is already exist",
                     HttpStatus.BAD_REQUEST);
         }
     }
 
     @RequestMapping(method = RequestMethod.PUT, path = "/bundles/{id}")
-    public ResponseEntity<String> updateBundle(@RequestBody Bundle bundle, @PathVariable int id) {
-        int flag=bundleService.updateBundle(id,bundle);
+    public ResponseEntity<String> updateBundle(@RequestBody DtoBundle dtoBundle, @PathVariable int id) {
+        int flag=bundleService.updateBundle(id, dtoBundle);
         if (flag==1) {
             return new ResponseEntity<String>("Bundle with id: " + id + " updated successfully", HttpStatus.OK);
         } else if(flag==0){

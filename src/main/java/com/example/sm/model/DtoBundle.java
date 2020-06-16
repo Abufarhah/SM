@@ -1,14 +1,14 @@
 package com.example.sm.model;
 
-public class Bundle implements Comparable<Bundle>{
+public class DtoBundle implements Comparable<DtoBundle>{
     private int id;
     private String name;
     private double price;
 
-    public Bundle() {
+    public DtoBundle() {
     }
 
-    public Bundle(int id, String name, double price) {
+    public DtoBundle(int id, String name, double price) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -43,11 +43,11 @@ public class Bundle implements Comparable<Bundle>{
         return "Bundle [id=" + id + ", name=" + name + ", price=" + price + "]";
     }
 
+
     @Override
-    public int compareTo(Bundle o) {
+    public int compareTo(DtoBundle o) {
         if(getId()>o.getId())return 1;
         else if(getId()<o.getId())return -1;
         return 0;
     }
-
 }

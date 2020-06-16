@@ -46,5 +46,4 @@ public class BundleClient extends WebServiceGatewaySupport {
                                 DELETE_BUNDLE_REQUEST_SOPA_ACTION));
         return response;
     }
-
 }
