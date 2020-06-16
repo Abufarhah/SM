@@ -22,7 +22,7 @@ public class BundleDto {
     private ScanPolicy scanPolicy=new ScanPolicy();
 
     public List<Bundle> getBundleList(){
-        List<Bundle> bundleList = new ArrayList<Bundle>();
+        List<Bundle> bundleList = new ArrayList<>();
         aerospikeClient.scanAll(scanPolicy, AEROSPIKE_SERVER_NAMESPACE, AEROSPIKE_SERVER_SM_SETNAME, new ScanCallback() {
             @Override
             public void scanCallback(Key key, Record record) throws AerospikeException {

@@ -1,5 +1,8 @@
 package com.example.sm.service;
 
+import com.sun.xml.internal.ws.api.model.wsdl.WSDLFault;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.example.sm.dto.BundleDto;
 import com.example.sm.SoapCilent.BundleClient;
 import com.example.sm.model.Bundle;
@@ -11,6 +14,7 @@ import java.util.List;
 
 @Service
 public class BundleService {
+    private static final Logger log = LoggerFactory.getLogger(BundleService.class);
 
     @Autowired
     BundleClient bundleClient;
@@ -19,26 +23,32 @@ public class BundleService {
     private BundleDto bundleDto;
 
     public List<Bundle> getBundles() {
+        log.info("service to get list of bundles");
         return bundleDto.getBundleList();
     }
 
     public Bundle getBundle(int id) {
-       return bundleDto.getBundle(id);
+        log.info("service to get bundle: " + id);
+        return bundleDto.getBundle(id);
     }
 
     public int addBundle(Bundle bundle) {
+        log.info("service to add bundle: " + bundle.getId());
         return bundleDto.addBundle(bundle);
     }
 
     public int updateBundle(int id, Bundle bundle) {
-       return bundleDto.updateBundle(id,bundle);
+        log.info("service to update bundle: " + id);
+        return bundleDto.updateBundle(id,bundle);
     }
 
     public int deleteBundle(int id) {
-       return bundleDto.deleteBundle(id);
+        log.info("service to delete bundle: " + id);
+        return bundleDto.deleteBundle(id);
     }
 
     public int provisionBundle(int id) {
+        log.info("service to provisions bundle: " + id);
         try{
             Bundle bundle= bundleDto.getBundle(id);
             AddBundleResponse addBundleResponse=bundleClient.addBundle(bundle.getId(), bundle.getName(),bundle.getPrice());

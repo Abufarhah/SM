@@ -15,7 +15,7 @@ public class BundleClient extends WebServiceGatewaySupport {
     public GetBundleResponse getBundle(int id) {
         GetBundleRequest request = new GetBundleRequest();
         request.setId(id);
-        log.info("getting bundle: " + id);
+        log.info("soap request to get bundle: " + id);
         GetBundleResponse response = (GetBundleResponse) getWebServiceTemplate()
                 .marshalSendAndReceive(BUNDLES_SOAP_URI, request,
                         new SoapActionCallback(
@@ -28,7 +28,7 @@ public class BundleClient extends WebServiceGatewaySupport {
         request.setId(id);
         request.setName(name);
         request.setPrice(price);
-        log.info("adding bundle: " + id);
+        log.info("soap request to add bundle: " + id);
         AddBundleResponse response = (AddBundleResponse) getWebServiceTemplate()
                 .marshalSendAndReceive(BUNDLES_SOAP_URI, request,
                         new SoapActionCallback(
@@ -39,7 +39,7 @@ public class BundleClient extends WebServiceGatewaySupport {
     public DeleteBundleResponse deleteBundle(int id) {
         DeleteBundleRequest request = new DeleteBundleRequest();
         request.setId(id);
-        log.info("deleting bundle: " + id);
+        log.info("soap request to delete bundle: " + id);
         DeleteBundleResponse response = (DeleteBundleResponse) getWebServiceTemplate()
                 .marshalSendAndReceive(BUNDLES_SOAP_URI, request,
                         new SoapActionCallback(
