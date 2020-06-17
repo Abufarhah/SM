@@ -84,7 +84,8 @@ public class BundleService {
             return 1;
         }catch (Exception e){
             return -1;
-        }    }
+        }
+    }
 
     public int deleteBundle(int id) {
         try {
@@ -102,7 +103,11 @@ public class BundleService {
         log.info("service to provisions bundle: " + id);
         try{
             DaoBundle daoBundle =bundleRepository.findOne(id);
-            AddBundleResponse addBundleResponse=bundleClient.addBundle(daoBundle.getId(), daoBundle.getName(), daoBundle.getPrice());
+            if(!bundleRepository.exists(id)){
+                return -2;
+            }
+            AddBundleResponse addBundleResponse=bundleClient.addBundle(daoBundle.getId(), daoBundle.getName(),
+                    daoBundle.getPrice());
             if(addBundleResponse.getMessage().contains("exists"))return 0;
             return 1;
         } catch (Exception e) {

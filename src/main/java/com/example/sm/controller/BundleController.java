@@ -93,7 +93,10 @@ public class BundleController {
         } else if (flag == 0) {
             return new ResponseEntity<String>("Bundle with id: " + id + " is already provisioned",
                     HttpStatus.NOT_FOUND);
-        } else {
+        } else if (flag==-2){
+            return new ResponseEntity<String>("Bundle with id: " + id + " bundle not found",
+                    HttpStatus.NOT_FOUND);
+        }else{
             return new ResponseEntity<String>("Bundle with id: " + id + " error in provision",
                     HttpStatus.NOT_FOUND);
         }
