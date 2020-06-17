@@ -38,11 +38,11 @@ public class BundleController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/bundles/{id}")
-    public ResponseEntity<DtoBundle> getBundle(@PathVariable int id) {
+    public ResponseEntity<Object> getBundle(@PathVariable int id) {
         if (bundleService.getBundle(id) != null) {
-            return new ResponseEntity<DtoBundle>(bundleService.getBundle(id), HttpStatus.OK);
+            return new ResponseEntity<Object>(bundleService.getBundle(id), HttpStatus.OK);
         } else {
-            return new ResponseEntity<DtoBundle>(bundleService.getBundle(id), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Object>("Bundle with id: "+ id +" bundle not found", HttpStatus.NOT_FOUND);
         }
     }
 

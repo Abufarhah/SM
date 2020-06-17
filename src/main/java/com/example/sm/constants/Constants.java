@@ -14,14 +14,4 @@ public class Constants {
     public static final String ADD_BUNDLE_REQUEST_SOPA_ACTION="http://example.com/me/AddBundleRequest";
     public static final String DELETE_BUNDLE_REQUEST_SOPA_ACTION="http://example.com/me/DeleteBundleRequest";
     public static final String WSDL_CONTEXT_PATH="com.example.sm.wsdl";
-
-
-
-
-
-
-
-
-
-
 }

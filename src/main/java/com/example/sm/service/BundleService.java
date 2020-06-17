@@ -41,11 +41,13 @@ public class BundleService {
 
     public DtoBundle getBundle(int id) {
         log.info("service to get bundle: " + id);
+        try{
         DaoBundle daoBundle =bundleRepository.findOne(id);
         DtoBundle dtoBundle=bundleConvertor.daoToDtoBundle(daoBundle);
-        Optional<DtoBundle> returnedDtoBundle=Optional.of(dtoBundle);
-        returnedDtoBundle=Optional.ofNullable(new DtoBundle(0,"NA",0));
         return dtoBundle;
+        }catch (Exception e){
+            return null;
+        }
     }
 
     public int addBundle(DtoBundle dtoBundle) {
@@ -68,16 +70,16 @@ public class BundleService {
 
     public int updateBundle(int id, DtoBundle dtoBundle) {
         log.info("service to update bundle: " + id);
-        DaoBundle retrieveddaoBundle =bundleRepository.findOne(id);
-        String creationDate=retrieveddaoBundle.getCreationDate();
-        DaoBundle daoBundle=bundleConvertor.dtoToDaoBundle(dtoBundle);
-        Date updatingDate=new Date(System.currentTimeMillis());
-        daoBundle.setUpdatingDate(updatingDate);
-        daoBundle.setCreationDate(creationDate);
         try {
-            if (!bundleRepository.exists(daoBundle.getId())) {
+            if (!bundleRepository.exists(id)) {
                 return 0;
             }
+            DaoBundle retrieveddaoBundle =bundleRepository.findOne(id);
+            String creationDate=retrieveddaoBundle.getCreationDate();
+            DaoBundle daoBundle=bundleConvertor.dtoToDaoBundle(dtoBundle);
+            Date updatingDate=new Date(System.currentTimeMillis());
+            daoBundle.setUpdatingDate(updatingDate);
+            daoBundle.setCreationDate(creationDate);
             bundleRepository.save(daoBundle);
             return 1;
         }catch (Exception e){
