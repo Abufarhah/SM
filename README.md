@@ -16,6 +16,6 @@ The second project was a simulation of the managed element operations in which a
 from the aerospike database. The SOAP web service was used by the SM to provide a domainBundle from its database to the ME database.
 SOAP services can be testing with SoapUI using the url of the wsdl http://localhost:8083/SoapWS/bundles.wsdl
 
-The projects can be run using the jar file which was built using the command "java -jar" or "./gradlew bootRun"
+The projects can be run using the built jar file using the command "java -jar" or "./gradlew bootRun"
 
 *When trying to run the projects there must be an aerospike database server downloaded and run on the machine.
