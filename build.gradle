@@ -27,7 +27,7 @@ repositories {
 task genJaxb {
     ext.sourcesDir = "${buildDir}/generated-sources/jaxb"
     ext.classesDir = "${buildDir}/classes/jaxb"
-    ext.schema = "http://localhost:8083/SoapWS/bundles.wsdl"
+    ext.schema = "src/main/resources/bundles.wsdl"
 
     outputs.dir classesDir
 
@@ -78,11 +78,11 @@ dependencies {
 }
 
 test {
-    useJUnitPlatform()
+    useTestNG()
 }
 
 bootJar {
-    baseName = 'gs-consuming-web-service'
+    baseName = 'SM'
     version =  '0.0.1'
 }
 

@@ -1,0 +1,124 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://example.com/me" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://example.com/me" targetNamespace="http://example.com/me">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://example.com/me">
+            <xs:element name="getBundleRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="id" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getBundleResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="bundle" type="tns:bundle"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addBundleRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="id" type="xs:int"/>
+                        <xs:element name="name" type="xs:string"/>
+                        <xs:element name="price" type="xs:double"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addBundleResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="message" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deleteBundleRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="id" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deleteBundleResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="message" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="bundle">
+                <xs:sequence>
+                    <xs:element name="id" type="xs:int"/>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="price" type="xs:double"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="getBundleResponse">
+        <wsdl:part element="tns:getBundleResponse" name="getBundleResponse"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="addBundleResponse">
+        <wsdl:part element="tns:addBundleResponse" name="addBundleResponse"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="deleteBundleResponse">
+        <wsdl:part element="tns:deleteBundleResponse" name="deleteBundleResponse"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getBundleRequest">
+        <wsdl:part element="tns:getBundleRequest" name="getBundleRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="addBundleRequest">
+        <wsdl:part element="tns:addBundleRequest" name="addBundleRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="deleteBundleRequest">
+        <wsdl:part element="tns:deleteBundleRequest" name="deleteBundleRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="BundleServicePort">
+        <wsdl:operation name="getBundle">
+            <wsdl:input message="tns:getBundleRequest" name="getBundleRequest"> </wsdl:input>
+            <wsdl:output message="tns:getBundleResponse" name="getBundleResponse"> </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addBundle">
+            <wsdl:input message="tns:addBundleRequest" name="addBundleRequest"> </wsdl:input>
+            <wsdl:output message="tns:addBundleResponse" name="addBundleResponse"> </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteBundle">
+            <wsdl:input message="tns:deleteBundleRequest" name="deleteBundleRequest"> </wsdl:input>
+            <wsdl:output message="tns:deleteBundleResponse" name="deleteBundleResponse"> </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="BundleServicePortSoap11" type="tns:BundleServicePort">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="getBundle">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="getBundleRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getBundleResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addBundle">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="addBundleRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="addBundleResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteBundle">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="deleteBundleRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="deleteBundleResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="BundleServicePortService">
+        <wsdl:port binding="tns:BundleServicePortSoap11" name="BundleServicePortSoap11">
+            <soap:address location="http://localhost:8083/SoapWS"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
