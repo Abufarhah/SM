@@ -1,0 +1,40 @@
+version: '3.3'
+services:
+    sm:
+        container_name: sm
+        image: abufarhah/sm
+        ports: 
+            - 8080:8080
+        networks:
+            testing_net:
+                ipv4_address: 172.20.0.4
+                
+    me:
+        container_name: me
+        image: abufarhah/me
+        ports: 
+            - 8083:8083
+        networks:
+            testing_net:
+                ipv4_address: 172.20.0.5
+                
+    smaerospike:
+        container_name: smaerospike
+        image: abufarhah/smaerospike
+        networks:
+            testing_net:
+                ipv4_address: 172.20.0.2
+                
+    meaerospike:
+        container_name: meaerospike
+        image: abufarhah/meaerospike
+        networks:
+            testing_net:
+                ipv4_address: 172.20.0.3
+ 
+networks:
+    testing_net:
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.20.0.0/16
